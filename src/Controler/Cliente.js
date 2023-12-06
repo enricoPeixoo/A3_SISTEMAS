@@ -1,11 +1,13 @@
 import { openDb } from "../configDB.js";
 
+//Função para a criação da tabela Cliente
 export async function createTableCliente() {
   openDb().then(db => {
     db.exec('CREATE TABLE IF NOT EXISTS Cliente ( id_cliente INTEGER PRIMARY KEY, nome_cliente TEXT)')
   })
 }
 
+//Função para a criação de um novo cliente
 export async function insertCliente(req, res) {
   let cliente = req.body
   openDb().then(db => {
@@ -16,6 +18,7 @@ export async function insertCliente(req, res) {
   })
 }
 
+//Função para visualizar todos os clientes cadastrados
 export async function selectClientes(req, res) {
   openDb().then(db => {
     db.all('SELECT * FROM Cliente')
@@ -23,6 +26,7 @@ export async function selectClientes(req, res) {
   })
 }
 
+//Função para a visualização de UM cliente a partir do ID
 export async function selectCliente(req, res) {
   let id = req.body.id_cliente
   openDb().then(db => {
@@ -31,6 +35,7 @@ export async function selectCliente(req, res) {
   })
 }
 
+//Função para a edição de um cliente a partir do ID
 export async function updateCliente(req, res) {
   let cliente = req.body
   openDb().then(db => {
@@ -41,6 +46,7 @@ export async function updateCliente(req, res) {
   })
 }
 
+//Função para deletar um cliente cadastrado a partir do ID
 export async function deleteCliente(req, res) {
   let id = req.body.id_cliente
   openDb().then(db => {

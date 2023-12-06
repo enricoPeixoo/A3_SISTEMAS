@@ -1,11 +1,13 @@
 import { openDb } from "../configDB.js";
 
+//Função para a criação da tabela Produto
 export async function createTable() {
   openDb().then(db => {
     db.exec('CREATE TABLE IF NOT EXISTS Produto ( id_produto INTEGER PRIMARY KEY, nome_produto TEXT, valor_produto FLOAT, quantidade_produto INT)')
   })
 }
 
+//Função para a criação de um novo produto
 export async function insertProduto(req, res) {
   let produto = req.body
   openDb().then(db => {
@@ -16,6 +18,7 @@ export async function insertProduto(req, res) {
   })
 }
 
+//Função para a edição de um produto existente a partir do ID
 export async function updateProduto(req, res) {
   let produto = req.body
   openDb().then(db => {
@@ -26,6 +29,7 @@ export async function updateProduto(req, res) {
   })
 }
 
+//Função para visualizar todos os produtos cadastrados
 export async function selectProdutos(req, res) {
   openDb().then(db => {
    db.all('SELECT * FROM Produto')
@@ -33,6 +37,7 @@ export async function selectProdutos(req, res) {
   })
 }
 
+//Função para visualizar UM produto cadastrado a partir do ID
 export async function selectProduto(req, res) {
   let id = req.body.id_produto
   openDb().then(db => {
@@ -41,6 +46,7 @@ export async function selectProduto(req, res) {
   })
 }
 
+//Função para deletar um produto a partir do ID
 export async function deleteProduto(req, res) {
   let id = req.body.id_produto
   openDb().then(db => {
@@ -49,6 +55,14 @@ export async function deleteProduto(req, res) {
   })
   res.json({
     "statusCode": 200
+  })
+}
+
+//Função para exibir produtos com baixo estoque
+export async function selectProdutosBaixaQuantidade(req, res) {
+  openDb().then(db => {
+    db.all('SELECT * FROM Produto WHERE quantidade_produto <= 3')
+      .then(produtos => res.json(produtos))
   })
 }
 
