@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizar clientes</title>
+</head>
+<body>
+  
+  <h1>Clientes cadastrados</h1>
+  <div id="resposta"></div>
+
+
+  <script>
+    fetch('http://localhost:3000/clientes')
+    .then( (dados) => {return dados.json() })
+    .then ( (resp) => {
+      resposta = ''
+      for (cliente of resp) {
+        resposta += 'ID: ' +cliente.id_cliente+'<br>'+
+        'Nome: '+ cliente.nome_cliente + '<br>' +
+        '======================================= <br>'
+      }
+      document.getElementById('resposta').innerHTML= resposta
+    })
+    
+  </script>
+
+</body>
+</html>

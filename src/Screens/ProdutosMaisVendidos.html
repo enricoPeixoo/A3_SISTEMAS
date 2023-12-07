@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizar Produtos Mais Vendidos</title>
+</head>
+<body>
+  
+  <h1>Produtos Mais Vendidos</h1>
+  <div id="resposta"></div>
+
+
+  <script>
+    fetch('http://localhost:3000/produtos-mais-vendidos')
+    .then( (dados) => {return dados.json() })
+    .then ( (resp) => {
+      resposta = ''
+      for (produto of resp) {
+        resposta += 'ID: ' +produto.id_produto+'<br>'+
+        'Nome: '+ produto.nome_produto + '<br>' +
+        'Unidades Vendidas: '+ produto.total_vendido + '<br>' +
+        '======================================= <br>'
+      }
+      document.getElementById('resposta').innerHTML= resposta
+    })
+    
+  </script>
+
+</body>
+</html>

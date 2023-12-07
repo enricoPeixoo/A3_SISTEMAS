@@ -3,10 +3,12 @@ import { createTableCliente} from './Controler/Cliente.js';
 import { createTable} from './Controler/Produto.js';
 import { createTablePedidos } from './Controler/Pedidos.js';
 import express from 'express';
+import cors from 'cors'
 
 const app = express();
 app.use(express.json());
 
+app.use(cors())
 //Criação das tabelas caso elas não existam
 createTable();
 createTableCliente();

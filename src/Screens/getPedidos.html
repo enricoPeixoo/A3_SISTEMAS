@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizar Pedidos</title>
+</head>
+<body>
+  
+  <h1>Pedidos cadastrados</h1>
+  <div id="resposta"></div>
+
+
+  <script>
+    fetch('http://localhost:3000/pedidos')
+    .then( (dados) => {return dados.json() })
+    .then ( (resp) => {
+      resposta = ''
+      for (pedido of resp) {
+        resposta += 'ID do Pedido: ' +pedido.id_pedido+'<br>'+
+        'ID do Comprador: '+ pedido.id_cliente + '<br>' +
+        'ID do Produto comprado: '+ pedido.id_produto + '<br>' +
+        'Quantidade do produto comprado: '+ pedido.quantidade_pedido + '<br>' +
+        'Valor total da compra: '+ pedido.total_pedido + '<br>' +
+        '======================================= <br>'
+      }
+      document.getElementById('resposta').innerHTML= resposta
+    })
+    
+  </script>
+
+</body>
+</html>

@@ -7,6 +7,14 @@ export async function createTablePedidos() {
   })
 }
 
+//Função para visualização de todos os pedidos
+export async function selectPedidos(req, res) {
+  openDb().then(db => {
+    db.all('SELECT * FROM Pedido')
+      .then(pedidos => res.json(pedidos))
+  })
+}
+
 //Função para o pedido de compra
 export async function insertPedido(req, res) {
   let pedido = req.body
